@@ -25,5 +25,6 @@
     </task:scheduled-tasks> 
     
 
-
+	<!-- 將quartz整合到spring上提供定時任務功能 -->
+	<bean id="jobFactory" class="com.gary.operation.jobdemo.demo1.MyJobFactory"></bean>
 </beans>
