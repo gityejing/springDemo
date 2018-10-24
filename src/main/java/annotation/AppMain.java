@@ -31,5 +31,10 @@ public class AppMain {
 		for (String name : names) {
 			System.out.println(name);
 		}
+		
+		// 默认获取到的是工厂bean创建的对象
+		// 如果想要获取工厂bean本身，需要给id加一个前缀如"&blueFactoryBean"
+		Object object =  context.getBean("blueFactoryBean");
+		System.out.println(object.getClass().getTypeName());
 	}
 }

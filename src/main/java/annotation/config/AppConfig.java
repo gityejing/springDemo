@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
+import annotation.domain.BlueFactoryBean;
 import annotation.domain.Color;
 import annotation.domain.Persion;
 
@@ -31,5 +32,10 @@ public class AppConfig {
 	@Conditional({LinuxCondition.class})
 	Persion persion01() {
 		return new Persion("122","bill");
+	}
+	
+	@Bean
+	BlueFactoryBean blueFactoryBean() {
+		return new BlueFactoryBean();
 	}
 }
