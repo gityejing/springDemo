@@ -10,21 +10,17 @@ import org.springframework.stereotype.Component;
 @Aspect // 指定当前类为切面类
 public class Aop {
 
-	// 指定切入点表达式，拦截那些方法，即为那些类生成代理对象
-	// @Pointcut("execution(* com.bie.aop.UserDao.save(..))") ..代表所有参数
-	// @Pointcut("execution(* com.bie.aop.UserDao.*())") 指定所有的方法
-	// @Pointcut("execution(* com.bie.aop.UserDao.save())") 指定save方法
-	@Pointcut("execution(* annotation5.TestService.*())")
-	public void pointCut() {
-
+	@Pointcut("execution(public int annotation5.TestService.*(..) )")
+	public void pointcut() {
+		
 	}
-
-	@Before("pointCut()")
+	
+	@Before("pointcut()")
 	public void begin() {
 		System.out.println("执行方法前记录日志");
 	}
 
-	@After("pointCut()")
+	@After("pointcut()")
 	public void close() {
 		System.out.println("方法执行完后调用");
 	}

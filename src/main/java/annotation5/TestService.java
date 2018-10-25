@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestService {
-
 	public int div(int i, int j) {
+		System.out.println("方法被调用");
 		return i / j;
 	}
 }
