@@ -22,7 +22,13 @@ spring 基于注解开发
 @PostConstruct bean初始化和依赖注入后调用
 @PreDestroy 在容器关闭，并且是在容器关闭前调用
 
-@
+@PropertySource(value = {"jdbc.properties","classpath:common.properties", "classpath:abc.properties"},
+encoding="UTF-8",ignoreResourceNotFound=true)
+用来读取外部的配置文件
+
+@Value("${destinationLocation}")用来读取配置文件中的键值
+
+
 
 
 

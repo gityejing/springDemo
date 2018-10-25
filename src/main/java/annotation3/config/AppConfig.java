@@ -8,7 +8,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
 @ComponentScan(value="annotation3")
-@PropertySource(value = {"jdbc.properties","classpath:common.properties", "classpath:abc.properties"})
+@PropertySource(value = {"jdbc.properties","classpath:common.properties", "classpath:abc.properties"},
+encoding="UTF-8",ignoreResourceNotFound=true)
 //@ImportResource
 public class AppConfig {
 	 
