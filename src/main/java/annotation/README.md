@@ -28,6 +28,16 @@ encoding="UTF-8",ignoreResourceNotFound=true)
 
 @Value("${destinationLocation}")用来读取配置文件中的键值
 
+@Autowired 根据类型注入， 
+@Resource 默认根据名字注入，其次按照类型搜索
+@Autowired @Qualifie("userService") 两个结合起来可以根据名字和类型注入
+1，放在参数位置
+2，放在方法上
+3，放在构造器上
+
+@Primary 注解的实例优先于其他实例被注入
+
+@Transactional 可以作用于接口、接口方法、类以及类方法上。推荐用在类和类的方法上。
 
 
 
