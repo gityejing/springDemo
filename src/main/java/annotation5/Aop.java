@@ -1,6 +1,9 @@
 package annotation5;
 
+import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -20,9 +23,18 @@ public class Aop {
 		System.out.println("执行方法前记录日志");
 	}
 
-	@After("pointcut()")
-	public void close() {
+	@After(value="pointcut()")
+	public void divAfter() {
 		System.out.println("方法执行完后调用");
 	}
+	
+	@AfterReturning(value="pointcut()",returning="result")
+	public void divReturn(Object result) {
+		System.out.println("方法执行完后调用:"+result);
+	}
 
+	@AfterThrowing(value="pointcut()",throwing="exception")
+	public void divAfterThrowing(Exception exception) {
+		System.out.println("抛出异常后："+exception.getMessage());
+	}
 }

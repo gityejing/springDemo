@@ -10,7 +10,7 @@ public class AppMain {
 //		printContext(context);
 		context.close();
 	}
-	
+
 	private static void printContext(AnnotationConfigApplicationContext context) {
 		String[] names = context.getBeanDefinitionNames();
 		for (String name : names) {
