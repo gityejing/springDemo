@@ -16,7 +16,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import annotation4.domain.ConInfo;
 
-@Profile("dev")
+//@Profile("dev")
 @Configuration
 @ComponentScan(value="annotation4")
 @PropertySource(value = {"jdbc.properties"},encoding="UTF-8",ignoreResourceNotFound=true)

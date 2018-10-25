@@ -8,3 +8,5 @@ context.register(AppConfig.class);// 注册主配置类
 context.refresh();// 刷新容器
 
 3,写在类上，只有当类上的配置和当前环境一致时，类中配置的组件才会生效
+
+4，没有指定环境标识的bean都会被加载
