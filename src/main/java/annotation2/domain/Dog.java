@@ -3,7 +3,9 @@ package annotation2.domain;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Dog {
 
 	public Dog() {

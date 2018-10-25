@@ -1,5 +1,6 @@
 package annotation2.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +15,7 @@ import annotation2.domain.Dog;
 
 @Configuration
 @ComponentScan(value="annotation2")
-@Import({Bus.class,Dog.class,Cat.class})
+@Import({Bus.class,Dog.class})
 public class AppConfig {
 
 	@Bean(initMethod="init",destroyMethod="destory")
@@ -24,9 +25,16 @@ public class AppConfig {
 	}
 	
 	@Bean
+	@Qualifier("cat") // 指定bean的id名
+	public Cat cat() {
+		return new Cat();
+	}
+	
+	@Bean
 	public CatBeanPostProcessor catBeanPostProcessor() {
 		return new CatBeanPostProcessor();
 	}
+		
 	
 	
 }

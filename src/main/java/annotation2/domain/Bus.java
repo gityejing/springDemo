@@ -2,7 +2,9 @@ package annotation2.domain;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Bus implements InitializingBean,DisposableBean{
 	
 	public Bus() {

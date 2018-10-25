@@ -22,6 +22,8 @@ spring 基于注解开发
 @PostConstruct bean初始化和依赖注入后调用
 @PreDestroy 在容器关闭，并且是在容器关闭前调用
 
+@
+
 
 
 

@@ -1,8 +1,8 @@
 spring bean的生命周期
 
-bean 的生命周期，创建--初始化--销毁，容器来进行管理
-我们可以自定义方法来进行初始化和销毁
-1,指定初始化和销毁方法
+bean 的生命周期，创建--初始化--销毁，容器来进行管理，我们可以通过如下的方式和容器进行交互，参与bean的整个生命周期管理工作。
+
+1,指定初始化和销毁方法,例如：@Bean(initMethod="init",destroyMethod="destory")
 
 2，InitializingBean和DisposableBean接口
 如果Bean类已实现org.springframework.beans.factory.InitializingBean接口，则执行他的afterProPertiesSet()方法
@@ -14,3 +14,8 @@ bean 的生命周期，创建--初始化--销毁，容器来进行管理
 
 4，BeanPostProcessor接口
 如果我们想在Spring容器中完成bean实例化、配置以及其他初始化方法前后要添加一些自己逻辑处理。我们需要定义一个或多个BeanPostProcessor接口实现类，然后注册到Spring IoC容器中
+
+
+
+
+
