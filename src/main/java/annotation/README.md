@@ -39,6 +39,8 @@ encoding="UTF-8",ignoreResourceNotFound=true)
 
 @Transactional 可以作用于接口、接口方法、类以及类方法上。推荐用在类和类的方法上。
 
+@Profile 根据当前环境动态的激活和切换一系列组件，比如载入不同的数据源的配置
+
 
 
 

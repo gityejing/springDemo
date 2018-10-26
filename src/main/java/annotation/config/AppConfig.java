@@ -6,12 +6,14 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
 import annotation.domain.BlueFactoryBean;
 import annotation.domain.Color;
 import annotation.domain.Persion;
 
+@Profile("dev")
 @Configuration
 @ComponentScan(value="annotation")// 自动扫描bean，适用于我们自己写的bean，并且有注解
 //@Import(Color.class) // 适用于导入别人写的或jar包中的bean
