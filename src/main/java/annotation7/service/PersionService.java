@@ -15,10 +15,10 @@ public class PersionService {
 	private PersionDao persionDao;
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@Transactional(readOnly=false)
 	public void insert() {
 		persionDao.insert("herio1");
-//		int i = 1/0;
+		int a = 1 / 0;
 		persionDao.insert("herio2");
 		System.out.println("≤Â»ÎÕÍ≥…");
 	}
