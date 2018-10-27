@@ -18,7 +18,6 @@ public class PersionService {
 	@Transactional(readOnly=false)
 	public void insert() {
 		persionDao.insert("herio1");
-		int a = 1 / 0;
 		persionDao.insert("herio2");
 		System.out.println("²åÈëÍê³É");
 	}

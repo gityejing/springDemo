@@ -3,7 +3,6 @@ package annotation7.config;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -27,34 +26,43 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ComponentScan("annotation7")
 public class AppConfig {
 
-	@Bean
-	public DataSource dataSource() throws PropertyVetoException {
+	@Bean("dataSource")
+	public DataSource dataSource() {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		dataSource.setUser("root");
 		dataSource.setPassword("881213");
 		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/test");
-		dataSource.setDriverClass("com.mysql.jdbc.Driver");
+		try {
+			dataSource.setDriverClass("com.mysql.jdbc.Driver");
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
 		return dataSource;
 	}
 
 	/**
-	 * 配置事务管理器，进行具体的事务管理
+	 *   配置事务管理器，进行具体的事务管理
 	 * 
 	 * @param dataSource
 	 * @return
 	 */
 	@Bean
-	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
 	
+	
 	@Bean
-	public LocalSessionFactoryBean localSessionFactoryBean() throws PropertyVetoException, FileNotFoundException, IOException {
+	public LocalSessionFactoryBean localSessionFactoryBean() {
 		String rootPath = getClass().getResource("/").getPath();
 		File file = new File(rootPath+"/hibernate.cfg.properties");
 		Properties hbtProperties = new Properties();
-		hbtProperties.load(new FileInputStream(file));
+		try {
+			hbtProperties.load(new FileInputStream(file));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
 		localSessionFactoryBean.setDataSource(dataSource());
 		localSessionFactoryBean.setPackagesToScan("annotation7.domain");
@@ -62,22 +70,21 @@ public class AppConfig {
 		return localSessionFactoryBean;
 	}
 	
+//	@Bean
+//	SessionFactory sessionFactory() {
+//		return localSessionFactoryBean().getObject();
+//	}
 	
 	@Bean
-	public SessionFactory sessionFactory() throws FileNotFoundException, PropertyVetoException, IOException {
-		return localSessionFactoryBean().getObject();
-	}
-	
-	@Bean
-	public HibernateTemplate hibernateTemplate() throws FileNotFoundException, PropertyVetoException, IOException {
+	public HibernateTemplate hibernateTemplate(){
 		HibernateTemplate hibernateTemplate = new HibernateTemplate();
-		hibernateTemplate.setSessionFactory(sessionFactory());
+		hibernateTemplate.setSessionFactory(localSessionFactoryBean().getObject());
 		return hibernateTemplate;
 	}
 	
 	@Bean
-	public PlatformTransactionManager platformTransactionManager() throws FileNotFoundException, PropertyVetoException, IOException {
-		PlatformTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory());
+	public PlatformTransactionManager platformTransactionManager(){
+		PlatformTransactionManager transactionManager = new HibernateTransactionManager(localSessionFactoryBean().getObject());
 		return transactionManager;
 	}
 }
