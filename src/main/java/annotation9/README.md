@@ -23,9 +23,7 @@ spring 与 springdata 的整合使用
 	transactionManagerRef = "transactionManager", 
 	entityManagerFactoryRef = "entityManagerFactory")
 	
-
 // 等价于继承 JpaRepository<Persion,Long> 接口
 @RepositoryDefinition(domainClass=Persion.class,idClass=Long.class)
-
-@Query
-@Param
+@Query和@Param的组合使用，进行查询参数的映射
+@Query和@Modifying的组合使用，可以达到修改的效果

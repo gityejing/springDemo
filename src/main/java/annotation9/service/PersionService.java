@@ -56,6 +56,17 @@ public class PersionService {
 		}
 	}
 	
+	public void countPersions() {
+		int count = persionRepository2.countPersions();
+		System.out.println(count);
+	}
+	
+	public void updateNameById(Long id,String name) {
+		persionRepository2.updateNameById(id, name);
+		Persion persion = persionRepository.getOne(id);
+		System.out.println(persion);
+	}
+	
 	public void clear() {
 		persionDao.clear();
 	}
