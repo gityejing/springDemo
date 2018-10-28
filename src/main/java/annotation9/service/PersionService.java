@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,6 +67,17 @@ public class PersionService {
 		persionRepository2.updateNameById(id, name);
 		Persion persion = persionRepository.getOne(id);
 		System.out.println(persion);
+	}
+	
+	public void findAllByPage(int page, int size) {
+		PageRequest pageRequest = PageRequest.of(page-1, size, Direction.DESC, "id");
+		Page<Persion> page2 = persionRepository.findAll(pageRequest);
+		List<Persion> list = page2.getContent();
+		for (Persion persion : list) {
+			System.out.println(persion);
+		}
+		System.out.println("总页数："+page2.getTotalPages());
+		System.out.println("总记录数："+page2.getTotalElements());
 	}
 	
 	public void clear() {
