@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import annotation7.domain.Persion;
+import annotation9.domain.Persion;
 
 @Repository
 public class PersionDao {

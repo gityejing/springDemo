@@ -1,10 +1,12 @@
 package annotation9.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import annotation7.domain.Persion;
+import annotation9.domain.Persion;
 
 
-public interface PersionRepository extends JpaRepository<Persion,Long>{
+@Repository
+public interface PersionRepositoryImpl extends JpaRepository<Persion,Long>{
 
 }

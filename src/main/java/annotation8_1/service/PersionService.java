@@ -13,7 +13,7 @@ public class PersionService {
 	
 	@Resource
 	private PersionDao persionDao;
-	
+	@Transactional(readOnly=false)
 	public void insert() {
 		persionDao.insert("herio1");
 		persionDao.insert("herio2");

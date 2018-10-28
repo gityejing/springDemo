@@ -11,7 +11,7 @@ public class AppMain2 {
 			= new AnnotationConfigApplicationContext(AppConfig.class);
 		PersionService persionService = context.getBean(PersionService.class);
 		persionService.clear();
-//		persionService.insert();
+		persionService.save();
 		context.close();
 	}
 }

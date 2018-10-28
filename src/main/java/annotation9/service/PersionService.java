@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import annotation9.dao.PersionDao;
+import annotation9.dao.PersionRepositoryImpl;
 import annotation9.domain.Persion;
 
 @Service
@@ -14,6 +15,9 @@ public class PersionService {
 	
 	@Resource
 	private PersionDao persionDao;
+	
+	@Resource
+	private PersionRepositoryImpl persionRepository;
 	
 	
 	@Transactional(readOnly=false)
@@ -26,6 +30,7 @@ public class PersionService {
 	public void save() {
 		Persion persion = new Persion();
 		persion.setName("èàÏn∑f");
+		persionRepository.save(persion);
 	}
 	
 	public void clear() {

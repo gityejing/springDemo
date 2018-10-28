@@ -25,7 +25,7 @@ public class PersionDao {
 	public void insert(String name) {
 		Persion persion = new Persion();
 		persion.setName("haha");
-		getEntityManager().persist(persion);
+		getEntityManager().merge(persion);
 	}
 
 	public void clear() {

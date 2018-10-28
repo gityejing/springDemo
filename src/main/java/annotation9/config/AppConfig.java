@@ -18,22 +18,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement // 开启基于注解的事务管理功能
-@EnableJpaRepositories(basePackages = "{annotation9.dao}", 
-	repositoryImplementationPostfix = "Impl", transactionManagerRef = "transactionManager", 
-	entityManagerFactoryRef = "entityManagerFactory")
+@EnableJpaRepositories(basePackages = "{annotation9.dao}", repositoryImplementationPostfix = "Impl", transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
 @ComponentScan("annotation9")
 public class AppConfig {
 
@@ -128,17 +124,11 @@ public class AppConfig {
 		return hibernateTemplate;
 	}
 
-	@Bean
-	public PlatformTransactionManager platformTransactionManager() {
-		PlatformTransactionManager transactionManager = new HibernateTransactionManager(
-				localSessionFactoryBean().getObject());
-		return transactionManager;
-	}
-	
 	@Bean("transactionManager")
 	public JpaTransactionManager jpaTransactionManager() {
-		JpaTransactionManager j = new JpaTransactionManager();
-		j.setEntityManagerFactory(localContainerEntityManagerFactoryBean().getNativeEntityManagerFactory());
-		return j;
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager
+				.setEntityManagerFactory(localContainerEntityManagerFactoryBean().getNativeEntityManagerFactory());
+		return transactionManager;
 	}
 }

@@ -41,7 +41,7 @@ public class AppConfig {
 	}
 
 	/**
-	 *   配置事务管理器，进行具体的事务管理
+	 * 配置事务管理器，进行具体的事务管理
 	 * 
 	 * @param dataSource
 	 * @return
@@ -51,12 +51,11 @@ public class AppConfig {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
-	
-	
+
 	@Bean
 	public LocalSessionFactoryBean localSessionFactoryBean() {
 		String rootPath = getClass().getResource("/").getPath();
-		File file = new File(rootPath+"/hibernate.cfg.properties");
+		File file = new File(rootPath + "/hibernate.cfg.properties");
 		Properties hbtProperties = new Properties();
 		try {
 			hbtProperties.load(new FileInputStream(file));
@@ -69,22 +68,24 @@ public class AppConfig {
 		localSessionFactoryBean.setHibernateProperties(hbtProperties);
 		return localSessionFactoryBean;
 	}
-	
-//	@Bean
-//	SessionFactory sessionFactory() {
-//		return localSessionFactoryBean().getObject();
-//	}
-	
+
 	@Bean
-	public HibernateTemplate hibernateTemplate(){
+	SessionFactory sessionFactory() {
+		return localSessionFactoryBean().getObject();
+	}
+
+	@Bean
+	public HibernateTemplate hibernateTemplate() {
 		HibernateTemplate hibernateTemplate = new HibernateTemplate();
 		hibernateTemplate.setSessionFactory(localSessionFactoryBean().getObject());
 		return hibernateTemplate;
 	}
-	
+
 	@Bean
-	public PlatformTransactionManager platformTransactionManager(){
-		PlatformTransactionManager transactionManager = new HibernateTransactionManager(localSessionFactoryBean().getObject());
+	public PlatformTransactionManager platformTransactionManager() {
+		PlatformTransactionManager transactionManager = new HibernateTransactionManager(
+				localSessionFactoryBean().getObject());
 		return transactionManager;
 	}
+	
 }

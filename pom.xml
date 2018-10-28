@@ -55,6 +55,14 @@
 		    <artifactId>spring-aspects</artifactId>
 		    <version>${spring.version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>2.1.1.RELEASE</version>
+		</dependency>
+		
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
@@ -77,13 +85,6 @@
 		    <version>0.9.5.2</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
-		<dependency>
-		    <groupId>com.zaxxer</groupId>
-		    <artifactId>HikariCP</artifactId>
-		    <version>3.2.0</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
@@ -99,13 +100,6 @@
 		    <version>${hibernate.version}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-hikaricp -->
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-hikaricp</artifactId>
-		    <version>${hibernate.version}</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>
@@ -113,5 +107,14 @@
 		    <version>${hibernate.version}</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.2.Final</version>
+		</dependency>
+
+		
 	</dependencies>
+	
 </project>

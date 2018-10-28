@@ -2,7 +2,7 @@ package annotation8;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import annotation7.service.PersionService;
+import annotation8.service.PersionService;
 
 public class AppMain {
 	public static void main(String[] args) {
