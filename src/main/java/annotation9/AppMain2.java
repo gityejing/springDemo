@@ -10,7 +10,8 @@ public class AppMain2 {
 		AnnotationConfigApplicationContext context 
 			= new AnnotationConfigApplicationContext(AppConfig.class);
 		PersionService persionService = context.getBean(PersionService.class);
-		persionService.save();
+//		persionService.save();
+		persionService.findPersionsLike("èàÏn");
 		context.close();
 	}
 }

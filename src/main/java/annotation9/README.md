@@ -16,3 +16,16 @@ spring 与 springdata 的整合使用
     <artifactId>hibernate-entitymanager</artifactId>
     <version>${hibernate.version}</version>
 </dependency>
+
+
+注解：
+@EnableJpaRepositories(basePackages = {"annotation9.dao"}, 
+	transactionManagerRef = "transactionManager", 
+	entityManagerFactoryRef = "entityManagerFactory")
+	
+
+// 等价于继承 JpaRepository<Persion,Long> 接口
+@RepositoryDefinition(domainClass=Persion.class,idClass=Long.class)
+
+@Query
+@Param
