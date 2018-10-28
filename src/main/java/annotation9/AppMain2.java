@@ -10,7 +10,6 @@ public class AppMain2 {
 		AnnotationConfigApplicationContext context 
 			= new AnnotationConfigApplicationContext(AppConfig.class);
 		PersionService persionService = context.getBean(PersionService.class);
-		persionService.clear();
 		persionService.save();
 		context.close();
 	}

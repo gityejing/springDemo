@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import annotation9.domain.Persion;
 
 
-@Repository
-public interface PersionRepositoryImpl extends JpaRepository<Persion,Long>{
+public interface PersionRepository extends JpaRepository<Persion,Long>{
 
 }

@@ -1,24 +1,17 @@
 package annotation9.config;
 
 import java.beans.PropertyVetoException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -29,7 +22,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement // 开启基于注解的事务管理功能
-@EnableJpaRepositories(basePackages = "{annotation9.dao}", repositoryImplementationPostfix = "Impl", transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
+@EnableJpaRepositories(basePackages = {"annotation9.dao"}, 
+	transactionManagerRef = "transactionManager", 
+	entityManagerFactoryRef = "entityManagerFactory")
 @ComponentScan("annotation9")
 public class AppConfig {
 
@@ -59,28 +54,6 @@ public class AppConfig {
 		return jdbcTemplate;
 	}
 
-	@Bean
-	public LocalSessionFactoryBean localSessionFactoryBean() {
-		String rootPath = getClass().getResource("/").getPath();
-		File file = new File(rootPath + "/hibernate.cfg.properties");
-		Properties hbtProperties = new Properties();
-		try {
-			hbtProperties.load(new FileInputStream(file));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-		localSessionFactoryBean.setDataSource(dataSource());
-		localSessionFactoryBean.setPackagesToScan("annotation9.domain");
-		localSessionFactoryBean.setHibernateProperties(hbtProperties);
-		return localSessionFactoryBean;
-	}
-
-	@Bean
-	SessionFactory sessionFactory() {
-		return localSessionFactoryBean().getObject();
-	}
-
 	// jpa 相关配置
 	@Bean
 	public HibernatePersistenceProvider hibernatePersistenceProvider() {
@@ -88,8 +61,8 @@ public class AppConfig {
 		return hibernatePersistenceProvider;
 	}
 
-	@Bean("entityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setPersistenceProvider(hibernatePersistenceProvider());
@@ -110,7 +83,7 @@ public class AppConfig {
 		jpaProperties.put("hibernate.cache.use_query_cache", false);
 		jpaProperties.put("hibernate.cache.use_second_level_cache", false);
 		jpaProperties.put("hibernate.enable_lazy_load_no_trans", true);
-
+		jpaProperties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 		jpaProperties.put("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
 		jpaProperties.put("hibernate.hbm2ddl.auto", "update");
 		bean.setJpaPropertyMap(jpaProperties);
@@ -118,17 +91,9 @@ public class AppConfig {
 	}
 
 	@Bean
-	public HibernateTemplate hibernateTemplate() {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate();
-		hibernateTemplate.setSessionFactory(localSessionFactoryBean().getObject());
-		return hibernateTemplate;
-	}
-
-	@Bean("transactionManager")
-	public JpaTransactionManager jpaTransactionManager() {
+	public JpaTransactionManager transactionManager() {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager
-				.setEntityManagerFactory(localContainerEntityManagerFactoryBean().getNativeEntityManagerFactory());
+		transactionManager.setDataSource(dataSource());
 		return transactionManager;
 	}
 }
