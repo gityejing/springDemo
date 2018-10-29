@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.ResourceUtils;
@@ -73,15 +74,23 @@ public class AppConfig {
 		return localSessionFactoryBean().getObject();
 	}
 
+	/**
+	 * 模板类
+	 * @return
+	 */
 	@Bean
 	public HibernateTemplate hibernateTemplate() {
 		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory());
 		return hibernateTemplate;
 	}
 
+	/**
+	 * 事务管理器
+	 * @return
+	 */
 	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource());
+	public HibernateTransactionManager transactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory());
 		return transactionManager;
 	}
 }

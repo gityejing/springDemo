@@ -9,7 +9,8 @@ public class AppMain {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 		PersionService persionService = ctx.getBean(PersionService.class);
-//		persionService.clear();
-		persionService.saveTest();
+		persionService.clear();
+//		persionService.saveTest();
+		persionService.save2();
 	}
 }
