@@ -10,9 +10,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import spring_springdata_jpa.dao.PersionDao;
 import spring_springdata_jpa.dao.PersionRepository;
 import spring_springdata_jpa.dao.PersionRepository2;
+import spring_springdata_jpa.dao.impl.PersionDao;
 import spring_springdata_jpa.domain.Persion;
 
 @Service
@@ -49,6 +49,7 @@ public class PersionService {
 		for (Persion persion : list) {
 			System.out.println(persion);
 		}
+		persionRepository.findPersions(name);
 	}
 	
 	public void findPersionsLike(String name) {

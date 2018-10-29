@@ -1,4 +1,4 @@
-package spring_springdata_jpa.dao;
+package spring_springdata_jpa.dao.impl;
 
 import javax.annotation.Resource;
 

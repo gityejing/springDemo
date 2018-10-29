@@ -17,7 +17,7 @@ public class AppMain2 {
 //		persionService.updateNameById(2L, "“∫æß");
 //		persionService.findPersionsLike("èàÏn");
 //		persionService.findAllByPage(1, 3);
-		
+		persionService.findPersions("èàÏn");
 		context.close();
 	}
 }
