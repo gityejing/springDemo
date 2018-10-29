@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Table(name = "persion")
 public class Persion {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	public Long getId() {

@@ -20,9 +20,10 @@ public class PersionDao {
 	private HibernateTemplate hibernateTemplate;
 	
 	public void insert(String name) {
-//		jdbcTemplate.update(" insert into persion(name) values (?) ",name);
-		Persion persion = new Persion();
-		persion.setName("haha");
+		jdbcTemplate.update(" insert into persion(name) values (?) ",name);
+	}
+	
+	public void save(Persion persion) {
 		hibernateTemplate.save(persion);
 	}
 

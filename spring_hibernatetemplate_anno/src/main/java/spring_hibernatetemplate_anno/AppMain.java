@@ -7,9 +7,9 @@ import spring_hibernatetemplate_anno.service.PersionService;
 
 public class AppMain {
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		PersionService persionService = context.getBean(PersionService.class);
-		persionService.clear();
-		persionService.insert();
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+		PersionService persionService = ctx.getBean(PersionService.class);
+//		persionService.clear();
+		persionService.saveTest();
 	}
 }

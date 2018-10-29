@@ -58,6 +58,20 @@
 		</dependency>
 		<!-- 数据库驱动和数据库连接池配置结束 -->
 
+
+		<!-- 日志 -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.25</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.7.25</version>
+		</dependency>
+		
 	</dependencies>
 
 </project>

@@ -17,7 +17,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.ResourceUtils;
 
@@ -44,8 +43,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
 
@@ -62,11 +61,11 @@ public class AppConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-		localSessionFactoryBean.setDataSource(dataSource());
-		localSessionFactoryBean.setPackagesToScan("spring_hibernatetemplate_anno.domain");
-		localSessionFactoryBean.setHibernateProperties(hibernateProperties);
-		return localSessionFactoryBean;
+		LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
+		bean.setDataSource(dataSource());
+		bean.setPackagesToScan("spring_hibernatetemplate_anno.domain");
+		bean.setHibernateProperties(hibernateProperties);
+		return bean;
 	}
 
 	@Bean
@@ -81,8 +80,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager(DataSource dataSource) {
-		PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+	public DataSourceTransactionManager transactionManager() {
+		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource());
 		return transactionManager;
 	}
 }
