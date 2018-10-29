@@ -20,9 +20,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import spring_hibernatetemplate.domain.Persion;
 
 
-@EnableTransactionManagement
-@Configuration
-@ComponentScan("annotation7")
+//@EnableTransactionManagement
+//@Configuration
+//@ComponentScan("spring_hibernatetemplate")
 public class AppConfig {
 
 	@Bean
